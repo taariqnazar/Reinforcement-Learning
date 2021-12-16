@@ -142,3 +142,21 @@ class Agent(object):
                 return np.argmax(self.network(torch.from_numpy(state)).numpy())
 
 
+class RandomAgent(object):
+    ''' Agent taking actions uniformly at random, child of the class Agent'''
+
+    def __init__(self, n_actions: int):
+        self.n_actions = n_actions
+
+    def take_action(self, state: np.ndarray, episode) -> np.ndarray:
+        ''' Compute a random action in [-1, 1]
+
+            Returns:
+                action (np.ndarray): array of float values containing the
+                    action. The dimensionality is equal to self.n_actions from
+                    the parent class Agent.
+        '''
+        return np.random.randint(0,self.n_actions)
+
+
+

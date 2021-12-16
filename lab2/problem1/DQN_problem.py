@@ -37,7 +37,7 @@ env = gym.make('LunarLander-v2')
 env.reset()
 
 # Parameters
-N_episodes = 1000                             # Number of episodes
+N_episodes = 500                             # Number of episodes
 discount_factor = 0.99                       # Value of the discount factor
 n_ep_running_average = 50                    # Running average of 50 episodes
 
@@ -46,7 +46,7 @@ n_states = 8
 dim_state = len(env.observation_space.high)  # State dimensionality
 epsilon_min = 0.05
 epsilon_max = 0.99
-buffer_size = 15000
+buffer_size = 30000
 batch_size = 64
 learning_rate = 1e-4
 reward_threshhold = 200
@@ -102,9 +102,9 @@ for i in EPISODES:
             running_average(episode_number_of_steps, n_ep_running_average)[-1],
             agent.time))
 
-    if running_average(episode_reward_list, n_ep_running_average)[-1] > reward_threshhold:
-        torch.save(agent.network, 'neural-network-2.pth')
-        break
+    # if running_average(episode_reward_list, n_ep_running_average)[-1] > reward_threshhold:
+        # torch.save(agent.network, 'neural-network-2.pth')
+        # break
 
 
 # Plot Rewards and steps
@@ -126,5 +126,5 @@ ax[1].set_ylabel('Total number of steps')
 ax[1].set_title('Total number of steps vs Episodes')
 ax[1].legend()
 ax[1].grid(alpha=0.3)
-plt.savefig(f'performance_{discount_factor}_{buffer_size}_{batch_size}.png')
+plt.savefig(f'performance_changed_bufsize.png')
 plt.show()
